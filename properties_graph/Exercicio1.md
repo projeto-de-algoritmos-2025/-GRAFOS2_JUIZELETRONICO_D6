@@ -1,52 +1,70 @@
-# 3493. Properties Graph
-Medium
+-----
 
-You are given a 2D integer array properties having dimensions n x m and an integer k.
+# 1489\. Encontrar Arestas Críticas e Pseudo-Críticas em uma Árvore Geradora Mínima
 
-Define a function intersect(a, b) that returns the number of distinct integers common to both arrays a and b.
+**Dificuldade:** Difícil
 
-Construct an undirected graph where each index i corresponds to properties[i]. There is an edge between node i and node j if and only if intersect(properties[i], properties[j]) >= k, where i and j are in the range [0, n - 1] and i != j.
+-----
 
-Return the number of connected components in the resulting graph.
+## Descrição do Problema
 
- 
+Dado um grafo ponderado, não direcionado e conectado com **n** vértices numerados de 0 a n-1, e um array `edges` onde `edges[i] = [ai, bi, weighti]` representa uma aresta bidirecional e ponderada entre os nós `ai` e `bi`. Uma **árvore geradora mínima (MST)** é um subconjunto das arestas do grafo que conecta todos os vértices sem ciclos e com o menor peso total de arestas possível.
 
-# Example 1:
+Encontre todas as **arestas críticas** e **pseudo-críticas** na árvore geradora mínima (MST) do grafo fornecido.
 
-Input: properties = [[1,2],[1,1],[3,4],[4,5],[5,6],[7,7]], k = 1
+  * Uma **aresta crítica** é uma aresta da MST cuja remoção do grafo causaria um aumento no peso da MST.
+  * Uma **aresta pseudo-crítica** é uma aresta que pode aparecer em algumas MSTs, mas não em todas.
 
-Output: 3
+Note que você pode retornar os índices das arestas em qualquer ordem.
 
-Explanation:
+-----
 
-The graph formed has 3 connected components:
+## Exemplos
 
-# Example 2:
+### Exemplo 1:
 
-Input: properties = [[1,2,3],[2,3,4],[4,3,5]], k = 2
+**Entrada:**
 
-Output: 1
+```
+n = 5, arestas = [[0,1,1],[1,2,1],[2,3,2],[0,3,2],[0,4,3],[3,4,3],[1,4,6]]
+```
 
-Explanation:
+**Saída:**
 
-The graph formed has 1 connected component:
+```
+[[0,1],[2,3,4,5]]
+```
 
-# Example 3:
+**Explicação:**
+A figura abaixo mostra todas as MSTs possíveis:
 
-Input: properties = [[1,1],[1,1]], k = 2
+Note que as duas arestas 0 e 1 aparecem em todas as MSTs, portanto, são arestas críticas.
+As arestas 2, 3, 4 e 5 fazem parte de apenas algumas MSTs, portanto, são consideradas arestas pseudo-críticas.
 
-Output: 2
+### Exemplo 2:
 
-Explanation:
+**Entrada:**
 
-intersect(properties[0], properties[1]) = 1, which is less than k. This means there is no edge between properties[0] and properties[1] in the graph.
+```
+n = 4, arestas = [[0,1,1],[1,2,1],[2,3,1],[0,3,1]]
+```
 
- 
+**Saída:**
 
-# Constraints:
+```
+[[],[0,1,2,3]]
+```
 
--   1 <= n == properties.length <= 100
--   1 <= m == properties[i].length <= 100
--   1 <= properties[i][j] <= 100
--   1 <= k <= m
+**Explicação:**
+Podemos observar que, como todas as 4 arestas têm peso igual, escolher quaisquer 3 arestas das 4 resultará em uma MST. Portanto, todas as 4 arestas são pseudo-críticas.
 
+-----
+
+## Restrições
+
+  * `2 <= n <= 100`
+  * `1 <= arestas.length <= min(200, n * (n - 1) / 2)`
+  * `arestas[i].length == 3`
+  * `0 <= ai < bi < n`
+  * `1 <= weighti <= 1000`
+  * Todos os pares `(ai, bi)` são distintos.
