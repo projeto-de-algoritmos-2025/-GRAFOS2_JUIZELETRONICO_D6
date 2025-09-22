@@ -19,7 +19,7 @@ Dificuldade: Hard<br>
 Problema: [Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/properties_graph/Exercicio1.c)<br>
 Codigo: [Solução](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/properties_graph/Exercicio1.md)<br>
 
-![]()<br>
+![](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/assets/imagem_2025-09-22_200250579.png)<br>
 
 ## Instalação 
 **Linguagem**: C++<br>
