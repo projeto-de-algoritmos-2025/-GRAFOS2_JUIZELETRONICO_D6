@@ -1,65 +1,99 @@
+#include <iostream>
 #include <vector>
-#include <unordered_set>
+#include <numeric>
+#include <algorithm>
 
-class Solution {
+class DSU {
 private:
-    void dfs(int u, const std::vector<std::vector<int>>& adj, std::vector<bool>& visited) {
-        visited[u] = true;
-        for (int v : adj[u]) {
-            if (!visited[v]) {
-                dfs(v, adj, visited);
-            }
-        }
-    }
+    std::vector<int> pai;
+    int componentes;
 
 public:
-    int numberOfComponents(std::vector<std::vector<int>>& properties, int k) {
-        int n = properties.size();
-        if (n <= 1) {
-            return n;
+    DSU(int n) {
+        pai.resize(n);
+        std::iota(pai.begin(), pai.end(), 0);
+        componentes = n;
+    }
+
+    int encontrar(int i) {
+        if (pai[i] == i) {
+            return i;
+        }
+        return pai[i] = encontrar(pai[i]);
+    }
+
+    bool unir(int i, int j) {
+        int raiz_i = encontrar(i);
+        int raiz_j = encontrar(j);
+        if (raiz_i != raiz_j) {
+            pai[raiz_i] = raiz_j;
+            componentes--;
+            return true;
+        }
+        return false;
+    }
+    
+    bool estaConectado() {
+        return componentes == 1;
+    }
+};
+
+class Solution {
+public:
+
+    std::vector<std::vector<int>> findCriticalAndPseudoCriticalEdges(int n, std::vector<std::vector<int>>& arestas) {
+        for (int i = 0; i < arestas.size(); ++i) {
+            arestas[i].push_back(i);
         }
 
-        std::vector<std::unordered_set<int>> sets(n);
-        for (int i = 0; i < n; ++i) {
-            sets[i] = std::unordered_set<int>(properties[i].begin(), properties[i].end());
-        }
+        std::sort(arestas.begin(), arestas.end(), [](const auto& a, const auto& b) {
+            return a[2] < b[2];
+        });
 
-        std::vector<std::vector<int>> adj(n);
-        for (int i = 0; i < n; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-                
-                int common_count = 0;
-
-                if (sets[i].size() < sets[j].size()) {
-                    for (int val : sets[i]) {
-                        if (sets[j].count(val)) {
-                            common_count++;
-                        }
-                    }
-                } else {
-                    for (int val : sets[j]) {
-                        if (sets[i].count(val)) {
-                            common_count++;
-                        }
-                    }
-                }
-                
-                if (common_count >= k) {
-                    adj[i].push_back(j);
-                    adj[j].push_back(i);
-                }
+        int peso_mst_base = 0;
+        DSU dsu_base(n);
+        for (const auto& aresta : arestas) {
+            if (dsu_base.unir(aresta[0], aresta[1])) {
+                peso_mst_base += aresta[2];
             }
         }
-        
-        std::vector<bool> visited(n, false);
-        int component_count = 0;
-        for (int i = 0; i < n; ++i) {
-            if (!visited[i]) {
-                component_count++;
-                dfs(i, adj, visited);
+
+        std::vector<int> arestas_criticas;
+        std::vector<int> arestas_pseudo_criticas;
+
+        for (int i = 0; i < arestas.size(); ++i) {
+            int peso_sem_aresta = 0;
+            DSU dsu_sem_aresta(n);
+            for (int j = 0; j < arestas.size(); ++j) {
+                if (i == j) continue;
+                const auto& aresta = arestas[j];
+                if (dsu_sem_aresta.unir(aresta[0], aresta[1])) {
+                    peso_sem_aresta += aresta[2];
+                }
+            }
+
+            if (!dsu_sem_aresta.estaConectado() || peso_sem_aresta > peso_mst_base) {
+                arestas_criticas.push_back(arestas[i][3]);
+                continue;
+            }
+
+            DSU dsu_com_aresta(n);
+            dsu_com_aresta.unir(arestas[i][0], arestas[i][1]);
+            int peso_com_aresta = arestas[i][2];
+
+            for (int j = 0; j < arestas.size(); ++j) {
+                if (i == j) continue;
+                const auto& aresta = arestas[j];
+                if (dsu_com_aresta.unir(aresta[0], aresta[1])) {
+                    peso_com_aresta += aresta[2];
+                }
+            }
+            
+            if (peso_com_aresta == peso_mst_base) {
+                arestas_pseudo_criticas.push_back(arestas[i][3]);
             }
         }
 
-        return component_count;
+        return {arestas_criticas, arestas_pseudo_criticas};
     }
 };
