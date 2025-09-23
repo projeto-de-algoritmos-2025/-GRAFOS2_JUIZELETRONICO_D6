@@ -1,4 +1,4 @@
-# GRAFOS1_JUIZELETRONICO_D6
+# GRAFOS2_JUIZELETRONICO_D6
 
 **Número da Lista**: 2<br>
 **Conteúdo da Disciplina**: Grafos 2<br>
