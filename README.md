@@ -59,8 +59,11 @@ Codigo: [Solução](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZE
 - 7°: Clicar em ```Run```.
  
 - 8°: Obter e Verificar resultado dos codigos.
-
+  
 ## Outros 
 **Apresentação da resolução dos exercícios:** 
+[LINK DO VÍDEO](https://youtu.be/r_BCH8sjXe0): https://youtu.be/r_BCH8sjXe0
+
+
 
 
