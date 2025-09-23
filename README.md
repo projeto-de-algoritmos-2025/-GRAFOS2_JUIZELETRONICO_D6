@@ -21,6 +21,24 @@ Codigo: [Solução](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZE
 
 ![](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/assets/imagem_2025-09-22_200250579.png)<br>
 
+
+### Exercício 2 - [Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description)
+
+Dificuldade: Medium<br>
+Problema: [Min Cost to Connect All Points](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/min_cost/Exercicio2.md)<br>
+Codigo: [Solução](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/min_cost/Exercicio2.cpp)<br>
+
+![](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/assets/min_cost.png)<br>
+
+
+### Exercício 3 - [Design Graph With Shortest Path Calculator](https://leetcode.com/problems/min-cost-to-connect-all-points/description)
+
+Dificuldade: Medium<br>
+Problema: [Design Graph With Shortest Path Calculator](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/design_graph/Exercicio3.md)<br>
+Codigo: [Solução](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/design_graph/Exercicio3.cpp)<br>
+
+![](https://github.com/projeto-de-algoritmos-2025/-GRAFOS2_JUIZELETRONICO_D6/blob/main/assets/design_graph.png)<br>
+
 ## Instalação 
 **Linguagem**: C++<br>
 - O codigo deve ser executado no site do LeetCode em uma classe Solution.
